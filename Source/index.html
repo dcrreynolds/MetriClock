@@ -1,154 +1,180 @@
 <html>
-<script type="text/javascript">
-function timeMsg()
-{
-var t=setTimeout("printMetric()",100);
-}
+	<script type="text/javascript">
+		function timeMsg()
+		{
+			var t=setTimeout("printMetric()",100);
+		}
 
-function printMetric() {
-currentTime = new Date()
+		function printMetric() 
+		{
+			currentTime = new Date()
+			
+			hour = currentTime.getHours();
+			minute = currentTime.getMinutes();
+			seconds = currentTime.getSeconds();
+			
+			totalmil = 24*60*60;
+			currentmil = (hour*60*60) + (minute*60) + seconds;
+			
+			metricTime = Math.floor((currentmil/totalmil) * 100000);
+			
+			metricHour = Math.floor(metricTime / 10000);
+			metricMin = Math.floor((metricTime - (metricHour * 10000)) / 100);  
+			metricSec = (metricTime - (metricHour * 10000) - (metricMin * 100));
+			
+			convertTime(metricHour, metricMin, metricSec);
+			
+			timeMsg();
+		}
 
-hour = currentTime.getHours();
-minute = currentTime.getMinutes();
-seconds = currentTime.getSeconds();
+		function convertTime(metricHour, metricMin, metricSec) 
+		{
+			metricHourD1 = Math.floor(metricHour/10);
+			SwitchState(metricHourD1, "hourD1");
+			
+			metricHourD2 = metricHour - (metricHourD1*10);
+			SwitchState(metricHourD2, "hourD2");
+			
+			metricMinD1 = Math.floor(metricMin/10);
+			SwitchState(metricMinD1, "minD1");
+			
+			metricMinD2 = metricMin - (metricMinD1*10);
+			SwitchState(metricMinD2, "minD2");
+			
+			metricSecD1 = Math.floor(metricSec/10);
+			SwitchState(metricSecD1, "secD1");
+			
+			metricSecD2 = metricSec - (metricSecD1*10);
+			SwitchState(metricSecD2, "secD2");
+		}
 
-totalmil = 24*60*60;
-currentmil = (hour*60*60) + (minute*60) + seconds;
-
-metricTime = Math.floor((currentmil/totalmil) * 100000);
-
-metricHour = Math.floor(metricTime / 10000);
-metricMin = Math.floor((metricTime - (metricHour * 10000)) / 100);  
-metricSec = (metricTime - (metricHour * 10000) - (metricMin * 100));
-
-convertTime(metricHour, metricMin, metricSec);
-
-timeMsg();
-}
-
-function convertTime(metricHour, metricMin, metricSec) {
- metricHourD1 = Math.floor(metricHour/10);
- SwitchState(metricHourD1, "hourD1");
- 
- metricHourD2 = metricHour - (metricHourD1*10);
- SwitchState(metricHourD2, "hourD2");
- 
- metricMinD1 = Math.floor(metricMin/10);
- SwitchState(metricMinD1, "minD1");
- 
- metricMinD2 = metricMin - (metricMinD1*10);
- SwitchState(metricMinD2, "minD2");
- 
- metricSecD1 = Math.floor(metricSec/10);
- SwitchState(metricSecD1, "secD1");
- 
- metricSecD2 = metricSec - (metricSecD1*10);
- SwitchState(metricSecD2, "secD2");
-}
-
-function SwitchState(timeDigit, loc){
-switch (timeDigit){
-case 1:
-  drawOne(loc);
-  break;
-case 2:
-  drawTwo(loc);
-  break;
-case 3:
-  drawThree(loc);
-  break;
-case 4:
-  drawFour(loc);
-  break;
-case 5:
-  drawFive(loc);
-  break;
-case 6:
-  drawSix(loc);
-  break;
-case 7:
-  drawSeven(loc);
-  break;
-case 8:
-  drawEight(loc);
-  break;
-case 9:
-  drawNine(loc);
-  break;
-case 10:
-  drawZero(loc);
-  break;
-default:
-  drawZero(loc);
- }
-}
-
-
-function drawOne(digit) {
-document.getElementById(digit).innerHTML="<img src=\"horzb.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horzb.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horzb.png\"; style=\"margin-left:10px;\">"
-}
-
-function drawTwo(digit) {
-document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vert.png\";><img src=\"vertb.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\">"
-}
-
-function drawThree(digit) {
-document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\">"
-}
-
-function drawFour(digit) {
-document.getElementById(digit).innerHTML="<img src=\"horzb.png\"; style=\"margin-left:10px;\"><img src=\"vert.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horzb.png\"; style=\"margin-left:10px;\">"
-}
-
-function drawFive(digit) {
-document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vert.png\";><img src=\"vertb.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\">"
-}
-
-function drawSix(digit) {
-document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"> <img src=\"vert.png\";> <img src=\"vertb.png\"; style=\"float:right;\"> <img src=\"horz.png\"; style=\"margin-left:10px;\"> <img src=\"vert.png\";> <img src=\"vert.png\"; style=\"float:right;\"> <img src=\"horz.png\"; style=\"margin-left:10px;\"> "
-}
-
-function drawSeven(digit) {
-document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"> <img src=\"vertb.png\";> <img src=\"vert.png\"; style=\"float:right;\"> <img src=\"horzb.png\"; style=\"margin-left:10px;\"> <img src=\"vertb.png\";> <img src=\"vert.png\"; style=\"float:right;\"> <img src=\"horzb.png\"; style=\"margin-left:10px;\"> "
-}
-
-function drawEight(digit){
-document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"> <img src=\"vert.png\";> <img src=\"vert.png\"; style=\"float:right;\"> <img src=\"horz.png\"; style=\"margin-left:10px;\"> <img src=\"vert.png\";> <img src=\"vert.png\"; style=\"float:right;\"> <img src=\"horz.png\"; style=\"margin-left:10px;\"> "
-}
-
-function drawNine(digit) {
-document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vert.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\">"
-}
-
-function drawZero(digit) {
-document.getElementById(digit).innerHTML="<img src=\"horz.png\" style=\"margin-left:10px;\"><img src=\"vert.png\"><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horzb.png\"; style=\"margin-left:10px;\"><img src=\"vert.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\">"
-}
+		function SwitchState(timeDigit, loc)
+		{
+			switch (timeDigit){
+				case 1:
+				  drawOne(loc);
+				  break;
+				case 2:
+				  drawTwo(loc);
+				  break;
+				case 3:
+				  drawThree(loc);
+				  break;
+				case 4:
+				  drawFour(loc);
+				  break;
+				case 5:
+				  drawFive(loc);
+				  break;
+				case 6:
+				  drawSix(loc);
+				  break;
+				case 7:
+				  drawSeven(loc);
+				  break;
+				case 8:
+				  drawEight(loc);
+				  break;
+				case 9:
+				  drawNine(loc);
+				  break;
+				case 10:
+				  drawZero(loc);
+				  break;
+				default:
+				  drawZero(loc);
+			}
+		}
 
 
-</script>
+		function drawOne(digit) 
+		{
+			document.getElementById(digit).innerHTML="<img src=\"horzb.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horzb.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horzb.png\"; style=\"margin-left:10px;\">"
+		}
 
-<body style="background-color:black;" onLoad="timeMsg();">
+		function drawTwo(digit) 
+		{
+			document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vert.png\";><img src=\"vertb.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\">"
+		}
 
-<div id="containter" style="width:1090px;height:300px;border:solid;border-color:white;margin:auto;border-radius:25px">
-<div id="hourD1" style="width:120;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
-</div>
-<div id="hourD2" style="width:120;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
-</div>
-<div id="colon" style="width:20px;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
-  <img src="colon.png">
-</div>
-<div id="minD1" style="width:120;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
-</div>
-<div id="minD2" style="width:120;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
-</div>
-<div id="colon" style="width:20px;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
-  <img src="colon.png">
-</div>
-<div id="secD1" style="width:120;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
-</div>
-<div id="secD2" style="width:120;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
-</div>
-</div>
+		function drawThree(digit) 
+		{
+			document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\">"
+		}
 
-</body>
+		function drawFour(digit) 
+		{
+			document.getElementById(digit).innerHTML="<img src=\"horzb.png\"; style=\"margin-left:10px;\"><img src=\"vert.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horzb.png\"; style=\"margin-left:10px;\">"
+		}
+
+		function drawFive(digit) 
+		{
+			document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vert.png\";><img src=\"vertb.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\">"
+		}
+
+		function drawSix(digit) 
+		{
+			document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"> <img src=\"vert.png\";> <img src=\"vertb.png\"; style=\"float:right;\"> <img src=\"horz.png\"; style=\"margin-left:10px;\"> <img src=\"vert.png\";> <img src=\"vert.png\"; style=\"float:right;\"> <img src=\"horz.png\"; style=\"margin-left:10px;\"> "
+		}
+
+		function drawSeven(digit) 
+		{
+			document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"> <img src=\"vertb.png\";> <img src=\"vert.png\"; style=\"float:right;\"> <img src=\"horzb.png\"; style=\"margin-left:10px;\"> <img src=\"vertb.png\";> <img src=\"vert.png\"; style=\"float:right;\"> <img src=\"horzb.png\"; style=\"margin-left:10px;\"> "
+		}
+
+		function drawEight(digit)
+		{
+			document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"> <img src=\"vert.png\";> <img src=\"vert.png\"; style=\"float:right;\"> <img src=\"horz.png\"; style=\"margin-left:10px;\"> <img src=\"vert.png\";> <img src=\"vert.png\"; style=\"float:right;\"> <img src=\"horz.png\"; style=\"margin-left:10px;\"> "
+		}
+
+		function drawNine(digit) {	
+			document.getElementById(digit).innerHTML="<img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vert.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\"><img src=\"vertb.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\">"
+		}
+
+		function drawZero(digit) 
+		{
+			document.getElementById(digit).innerHTML="<img src=\"horz.png\" style=\"margin-left:10px;\"><img src=\"vert.png\"><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horzb.png\"; style=\"margin-left:10px;\"><img src=\"vert.png\";><img src=\"vert.png\"; style=\"float:right;\"><img src=\"horz.png\"; style=\"margin-left:10px;\">"
+		}
+	</script>
+
+	<body style="background-color:black;" onLoad="timeMsg();">
+		<div id="containter" style="width:1090px;height:300px;border:solid;border-color:white;margin:auto;border-radius:25px">
+			<div id="hourD1" style="width:120;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
+			</div>
+			<div id="hourD2" style="width:120;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
+			</div>
+			<div id="colon" style="width:20px;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
+			  <img src="colon.png">
+			</div>
+			<div id="minD1" style="width:120;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
+			</div>
+			<div id="minD2" style="width:120;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
+			</div>
+			<div id="colon" style="width:20px;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
+			  <img src="colon.png">
+			</div>
+			<div id="secD1" style="width:120;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
+			</div>
+			<div id="secD2" style="width:120;float:left;margin-left:20px;margin-right:20px;margin-top:20px;">
+			</div>
+		</div>
+		
+		<br/>
+		<div id="containter" style="width:1090px;height:300px;margin:auto;border-radius:25px">
+			<font color="white">
+				This clock shows what time it would currently be if each day had 10 hours, each hours had 100 minutes, and each minute had 100 seconds.
+				<br/>
+				<br/>
+				Each metric hour last approximately 2.4 standard hours.
+				<br/>
+				Each metric minute last approximately 1.4 standard minutes
+				<br/>
+				<br/>
+				For more information about why we use a 24 hour day and have 60 minutes in an hour 
+				<a href="http://curious.astro.cornell.edu/physics/161-our-solar-system/the-earth/day-night-cycle/761-why-is-a-day-divided-into-24-hours-intermediate">
+					Check out this link
+				</a>
+			</font>
+		</div>
+	</body>
 </html>
